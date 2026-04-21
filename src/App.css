@@ -1,0 +1,154 @@
+:root {
+  --ease-spring: cubic-bezier(0.25, 1, 0.5, 1);
+  --radius-lg: 1.5rem;
+}
+
+/* --- THEME TOKENS --- */
+.theme-dark {
+  --bg-main: #09090b;
+  --surface: rgba(24, 24, 27, 0.6);
+  --surface-alt: rgba(39, 39, 42, 0.5);
+  --border: rgba(63, 63, 70, 0.6);
+  --border-hover: rgba(161, 161, 170, 0.4);
+  --text-main: #ffffff;
+  --text-muted: #a1a1aa;
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.15);
+  --aurora-1: rgba(56, 189, 248, 0.2);
+  --aurora-2: rgba(129, 140, 248, 0.2);
+  --aurora-3: rgba(192, 132, 252, 0.2);
+}
+
+.theme-light {
+  --bg-main: #f8fafc;
+  --surface: rgba(255, 255, 255, 0.85);
+  --surface-alt: rgba(241, 245, 249, 0.8);
+  --border: rgba(203, 213, 225, 0.8);
+  --border-hover: rgba(148, 163, 184, 0.5);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --accent: #0284c7;
+  --accent-glow: rgba(2, 132, 199, 0.12);
+  --aurora-1: rgba(2, 132, 199, 0.12);
+  --aurora-2: rgba(79, 70, 229, 0.12);
+  --aurora-3: rgba(147, 51, 234, 0.12);
+}
+
+.theme-shell {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* --- AURORA GRADIENT MESH --- */
+.aurora-bg {
+  position: fixed;
+  inset: -50%;
+  background:
+    radial-gradient(circle at 20% 30%, var(--aurora-1), transparent 50%),
+    radial-gradient(circle at 80% 20%, var(--aurora-2), transparent 50%),
+    radial-gradient(circle at 50% 80%, var(--aurora-3), transparent 50%);
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+  animation: aurora-mesh 24s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-mesh {
+  0% { transform: rotate(0deg) scale(1) translate(0, 0); }
+  100% { transform: rotate(15deg) scale(1.15) translate(-2%, 2%); }
+}
+
+.cursor-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+/* --- FLOATING NAV --- */
+.floating-nav {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 9999px;
+  padding: 0.6rem 0.75rem;
+  box-shadow: 0 10px 40px -10px var(--accent-glow);
+  transition: border-color 0.3s ease;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover { color: var(--text-main); }
+
+.theme-toggle {
+  color: var(--text-muted);
+  transition: color 0.3s ease, transform 0.3s var(--ease-spring);
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* --- TYPOGRAPHY & GRIDS --- */
+.text-gradient {
+  background: linear-gradient(135deg, var(--text-main) 15%, var(--text-muted) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* --- BENTO BOX ARCHITECTURE --- */
+.bento-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.4s var(--ease-spring), border-color 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0); /* Hardware accelerate */
+}
+
+.bento-card:hover {
+  transform: translateY(-4px) translateZ(0);
+  border-color: var(--border-hover);
+  box-shadow: 0 20px 40px -10px var(--accent-glow);
+}
+
+/* Inner glow injected dynamically on hover */
+.bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+/* --- UTILITIES --- */
+.bg-surface { background-color: var(--surface); }
+.bg-surface-alt { background-color: var(--surface-alt); }
+.border-soft { border-color: var(--border); }
+.text-main { color: var(--text-main); }
+.text-muted { color: var(--text-muted); }
+.text-accent { color: var(--accent); }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import {
   FaGithub, FaInstagram, FaLinkedin, FaXTwitter,
@@ -9,14 +9,16 @@ import {
 import './App.css';
 
 // --- UTILITY COMPONENTS ---
-function AuroraBackground() {
+const AuroraBackground = React.memo(() => {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"]);
 
-  return <motion.div className="aurora-bg" style={{ y }} aria-hidden="true" />;
-}
+  return <motion.div className="aurora-bg gpu-accelerated" style={{ y }} aria-hidden="true" />;
+});
 
-function ScrollReveal({ children, className = '', delay = 0, blur = true }) {
+AuroraBackground.displayName = 'AuroraBackground';
+
+const ScrollReveal = React.memo(({ children, className = '', delay = 0, blur = true }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, filter: blur ? 'blur(8px)' : 'none' }}
@@ -28,39 +30,48 @@ function ScrollReveal({ children, className = '', delay = 0, blur = true }) {
       {children}
     </motion.div>
   );
-}
+});
 
-function MagneticButton({ children, className = '', onClick, ...props }) {
+ScrollReveal.displayName = 'ScrollReveal';
+
+const MagneticButton = React.memo(({ children, className = '', onClick, ...props }) => {
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { damping: 15, stiffness: 150, mass: 0.1 });
   const springY = useSpring(y, { damping: 15, stiffness: 150, mass: 0.1 });
 
-  const handlePointerMove = (e) => {
+  const handlePointerMove = useCallback((e) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     x.set((e.clientX - (rect.left + rect.width / 2)) * 0.2);
     y.set((e.clientY - (rect.top + rect.height / 2)) * 0.2);
-  };
+  }, [x, y]);
+
+  const handlePointerLeave = useCallback(() => {
+    x.set(0);
+    y.set(0);
+  }, [x, y]);
 
   return (
     <motion.button
       ref={ref}
       onPointerMove={handlePointerMove}
-      onPointerLeave={() => { x.set(0); y.set(0); }}
+      onPointerLeave={handlePointerLeave}
       onClick={onClick}
       style={{ x: springX, y: springY }}
-      className={`magnetic-btn btn-neo ${className}`}
+      className={`magnetic-btn btn-neo gpu-accelerated ${className}`}
       {...props}
     >
       {children}
     </motion.button>
   );
-}
+});
+
+MagneticButton.displayName = 'MagneticButton';
 
 // New component for 3D tilt and border spotlight effect
-function TiltBentoCard({ children, className = '' }) {
+const TiltBentoCard = React.memo(({ children, className = '' }) => {
   const ref = useRef(null);
 
   const mouseX = useMotionValue(0);
@@ -69,7 +80,7 @@ function TiltBentoCard({ children, className = '' }) {
   const rotateX = useTransform(mouseY, [-150, 150], [7, -7]); // Reduced tilt
   const rotateY = useTransform(mouseX, [-150, 150], [-7, 7]);
 
-  function handlePointerMove(e) {
+  const handlePointerMove = useCallback((e) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     
@@ -80,17 +91,17 @@ function TiltBentoCard({ children, className = '' }) {
     // For border spotlight
     ref.current.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
     ref.current.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-  }
+  }, [mouseX, mouseY]);
 
-  function handlePointerLeave() {
+  const handlePointerLeave = useCallback(() => {
     mouseX.set(0);
     mouseY.set(0);
-  }
+  }, [mouseX, mouseY]);
 
   return (
     <motion.div
       ref={ref}
-      className={className}
+      className={`gpu-accelerated ${className}`}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       style={{
@@ -103,7 +114,9 @@ function TiltBentoCard({ children, className = '' }) {
       {children}
     </motion.div>
   );
-}
+});
+
+TiltBentoCard.displayName = 'TiltBentoCard';
 
 // --- DATA CONFIGURATION ---
 const techStack = ['HTML5/CSS3', 'JavaScript (ES6+)', 'React.js', 'PyQt6', 'Python', 'Java', 'AWS', 'Firebase'];
@@ -215,33 +228,37 @@ function App() {
   const smoothPointerX = useSpring(pointerX, { stiffness: 120, damping: 22, mass: 0.3 });
   const smoothPointerY = useSpring(pointerY, { stiffness: 120, damping: 22, mass: 0.3 });
 
+  // Memoize data arrays
+  const memoizedRoles = useMemo(() => roles, []);
+  const memoizedNavItems = useMemo(() => navItems, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
+      setRoleIndex((prev) => (prev + 1) % memoizedRoles.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [memoizedRoles]);
 
   useEffect(() => {
     localStorage.setItem('portfolio-theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  }, []);
 
-  const handlePointerMove = (event) => {
+  const handlePointerMove = useCallback((event) => {
     pointerX.set(event.clientX);
     pointerY.set(event.clientY);
-  };
+  }, [pointerX, pointerY]);
 
-  const handleSpotlight = (e) => {
+  const handleSpotlight = useCallback((e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
     e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-  };
+  }, []);
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = useCallback(async (e) => {
     e.preventDefault();
     setFormStatus('submitting');
     const form = e.target;
@@ -264,7 +281,7 @@ function App() {
       setFormStatus('error');
     }
     setTimeout(() => setFormStatus('idle'), 5000);
-  };
+  }, []);
 
   return (
     <div

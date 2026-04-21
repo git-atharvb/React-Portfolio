@@ -107,7 +107,7 @@ export default {
   },
   plugins: [
     /* Custom Plugins */
-    function({ addUtilities, theme, e }) {
+    function({ addUtilities }) {
       addUtilities({
         '.glass': {
           background: 'rgba(255, 255, 255, 0.1)',

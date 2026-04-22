@@ -71,24 +71,27 @@ function App() {
       return undefined;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visibleEntries[0]) {
-          setActiveSection(visibleEntries[0].target.id);
+    const handleScroll = () => {
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 10;
+      if (isAtBottom) {
+        setActiveSection(sections[sections.length - 1].id);
+        return;
+      }
+      
+      const focalPoint = window.innerHeight * 0.3; // Highlight section crossing 30% from the top
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= focalPoint && rect.bottom >= focalPoint) {
+          setActiveSection(section.id);
+          break;
         }
-      },
-      {
-        rootMargin: '-35% 0px -45% 0px',
-        threshold: [0.2, 0.45, 0.7],
-      },
-    );
+      }
+    };
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Trigger immediately to set initial active section
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [sectionIds]);
 
   useEffect(() => {
@@ -187,7 +190,7 @@ function App() {
         style={{ scaleX: scrollYProgress }}
       />
 
-      <div className="app-shell">
+      <div className="app-shell flex flex-col lg:flex-row-reverse gap-8 lg:gap-12">
         <PortfolioSidebar
           activeSection={activeSection}
           currentRole={currentRole}
@@ -202,7 +205,7 @@ function App() {
           theme={theme}
         />
 
-        <main id="main-content" className="site-main">
+        <main id="main-content" className="site-main flex-1 min-w-0">
           <HeroSection
             currentRole={currentRole}
             heroImage={heroImage}

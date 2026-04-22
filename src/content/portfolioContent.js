@@ -37,13 +37,13 @@ export const portfolioContent = {
     { label: 'Projects', href: '#projects' },
     { label: 'Journey', href: '#journey' },
     { label: 'Certifications', href: '#certifications' },
-    { label: 'Contact', href: '#contact' },
+    // { label: 'Contact', href: '#contact' },
   ],
   highlights: [
-    { label: 'Projects Built', value: '18+' },
+    { label: 'Projects Built', value: '12+' },
     { label: 'Internships', value: '2' },
-    { label: 'Certifications', value: '9+' },
-    { label: 'Current CGPA', value: '8.83' },
+    { label: 'Certifications', value: '23+' },
+    { label: 'Current CGPA', value: '9.45' },
   ],
   socialProof: [
     'Experience across internships, product prototypes, and academic projects.',

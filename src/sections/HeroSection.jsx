@@ -69,8 +69,8 @@ function HeroSection({ currentRole, heroImage, highlights, profile, socialProof 
         >
           <div className="hero-visual-shell tidy-hero-shell">
             <div className="hero-label-row">
-              <span className="hero-chip">Scroll storytelling</span>
-              <span className="hero-chip">Modern recruiter flow</span>
+              <span className="hero-chip">Explore My Portfolio</span>
+              <span className="hero-chip">Coding with a Vibe</span>
             </div>
 
             <div className="hero-portrait-panel tidy-hero-panel">
@@ -91,23 +91,6 @@ function HeroSection({ currentRole, heroImage, highlights, profile, socialProof 
                 <p>
                   A cleaner visual stack that supports the hero instead of competing with it.
                 </p>
-              </article>
-
-              <article className="hero-info-card">
-                <p className="section-eyebrow">Profile</p>
-                <p>Building interfaces that make technical ability immediately legible to recruiters.</p>
-              </article>
-
-              <article className="hero-info-card hero-highlights-card">
-                <p className="section-eyebrow">Highlights</p>
-                <div className="hero-mini-grid">
-                  {highlights.map((item) => (
-                    <div className="hero-mini-stat" key={item.label}>
-                      <strong>{item.value}</strong>
-                      <span>{item.label}</span>
-                    </div>
-                  ))}
-                </div>
               </article>
             </div>
           </div>

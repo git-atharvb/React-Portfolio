@@ -1,4 +1,28 @@
-import { FaBrain, FaLaptopCode, FaShieldHalved } from 'react-icons/fa6';
+import { motion } from 'framer-motion';
+import { 
+  FaBrain, 
+  FaLaptopCode, 
+  FaShieldHalved, 
+  FaAws, 
+  FaJava, 
+  FaLinux,
+  FaReact,
+  FaNodeJs,
+  FaPython,
+  FaHtml5,
+  FaCss3,
+  FaDocker,
+  FaGit,
+  FaFigma,
+  FaDatabase,
+  FaCloud,
+  FaAngular,
+  FaBolt,
+  FaFire,
+  FaServer,
+  FaCode,
+  FaGithub
+} from 'react-icons/fa6';
 import SectionHeading from '../components/SectionHeading.jsx';
 import ScrollReveal from '../ScrollReveal.jsx';
 
@@ -6,6 +30,97 @@ const iconMap = {
   product: FaLaptopCode,
   security: FaShieldHalved,
   ai: FaBrain,
+};
+
+const stackCategories = [
+  {
+    title: 'Frontend',
+    skills: ['Angular', 'React', 'Vite', 'HTML', 'CSS', 'React Native', 'PyQt6'],
+  },
+  {
+    title: 'Backend',
+    skills: ['Java', 'NodeJS', 'Python'],
+  },
+  {
+    title: 'Database',
+    skills: ['MongoDB Atlas', 'SQLite', 'MySQL', 'Firebase', 'Supabase'],
+  },
+  {
+    title: 'Tools',
+    skills: ['Git', 'GitHub', 'VS Code', 'IntelliJ', 'Figma', 'Cursor'],
+  },
+  {
+    title: 'Deployment',
+    skills: ['Vercel', 'Netlify', 'Firebase'],
+  },
+];
+
+const beyondWorkInterests = [
+  'Painting & Art ( Acrylic, Poster, Sketching )',
+  'Designing & Video Editing ( Canva, Filmora, DaVinci ), Multimedia Operatives.',
+  'Sport - Chess (Rapid/Blitz), Table-Tennis, Volleyball',
+  'Cube Solving : Algorithmic Practice ( 3*3, 4*4 )',
+  'Learning new technologies & exploring creativity.',
+  'Travelling, adventure and wide experiences.',
+];
+
+const softSkills = [
+  'Leadership',
+  'Documentation',
+  'Teamwork',
+  'Punctuality',
+  'Project Management',
+  'Presentation',
+  'Multi-lingual communication - English, Marathi, Hindi',
+];
+
+const getSkillIcon = (skillName) => {
+  if (typeof skillName !== 'string') return FaLaptopCode;
+  const normalized = skillName.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const map = {
+    angular: FaAngular,
+    react: FaReact,
+    reactnative: FaReact,
+    vite: FaBolt,
+    javascript: FaNodeJs,
+    js: FaNodeJs,
+    typescript: FaNodeJs,
+    ts: FaNodeJs,
+    node: FaNodeJs,
+    nodejs: FaNodeJs,
+    python: FaPython,
+    html: FaHtml5,
+    css: FaCss3,
+    aws: FaAws,
+    amazonwebservices: FaAws,
+    docker: FaDocker,
+    git: FaGit,
+    github: FaGithub,
+    figma: FaFigma,
+    vscode: FaCode,
+    intellij: FaCode,
+    cursor: FaCode,
+    java: FaJava,
+    linux: FaLinux,
+    mongodbatlas: FaDatabase,
+    mongodb: FaDatabase,
+    mongo: FaDatabase,
+    sqlite: FaDatabase,
+    mysql: FaDatabase,
+    supabase: FaDatabase,
+    firebase: FaFire,
+    vercel: FaServer,
+    netlify: FaServer,
+    postgres: FaDatabase,
+    postgresql: FaDatabase,
+    sql: FaDatabase,
+    gcp: FaCloud,
+    googlecloud: FaCloud,
+    azure: FaCloud,
+    kubernetes: FaCloud,
+    k8s: FaCloud
+  };
+  return map[normalized] || FaLaptopCode;
 };
 
 function AboutSection({ focusAreas, highlights, interests, profile, skills, strengths }) {
@@ -37,6 +152,17 @@ function AboutSection({ focusAreas, highlights, interests, profile, skills, stre
                   <span className="strength-bullet" aria-hidden="true" />
                   <p>{item}</p>
                 </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal className="content-panel" delay={0.12}>
+            <p className="section-eyebrow">Soft skills</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {softSkills.map((skill) => (
+                <span className="skill-badge cursor-default" key={skill}>
+                  {skill}
+                </span>
               ))}
             </div>
           </ScrollReveal>
@@ -75,22 +201,52 @@ function AboutSection({ focusAreas, highlights, interests, profile, skills, stre
 
           <ScrollReveal className="content-panel" delay={0.12}>
             <p className="section-eyebrow">Stack & tools</p>
-            <div className="skills-badge-grid">
-              {skills.map((skill) => (
-                <span className="skill-badge" key={skill}>
-                  {skill}
-                </span>
+            <div className="mt-6 space-y-6">
+              {stackCategories.map((category) => (
+                <div key={category.title}>
+                  <h4 className="mb-3 text-sm font-medium text-[var(--text-muted)]">
+                    {category.title}
+                  </h4>
+                  <motion.div 
+                    className="flex flex-wrap gap-3"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: '-50px' }}
+                    variants={{
+                      visible: { transition: { staggerChildren: 0.04 } },
+                      hidden: {},
+                    }}
+                  >
+                    {category.skills.map((skill) => {
+                      const Icon = getSkillIcon(skill);
+                      return (
+                        <motion.span
+                          className="skill-badge flex cursor-default items-center gap-2" 
+                          key={skill}
+                          variants={{
+                            hidden: { opacity: 0, scale: 0.8, y: 10 },
+                            visible: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } }
+                          }}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                        >
+                          <Icon className="text-[var(--text-muted)]" aria-hidden="true" />
+                          {skill}
+                        </motion.span>
+                      );
+                    })}
+                  </motion.div>
+                </div>
               ))}
             </div>
           </ScrollReveal>
 
           <ScrollReveal className="content-panel" delay={0.16}>
             <p className="section-eyebrow">Beyond work</p>
-            <div className="flex flex-wrap gap-3">
-              {interests.map((interest) => (
-                <span className="interest-badge" key={interest}>
+            <div className="mt-4 space-y-3">
+              {beyondWorkInterests.map((interest) => (
+                <h4 className="text-sm font-medium text-[var(--text-muted)] leading-relaxed" key={interest}>
                   {interest}
-                </span>
+                </h4>
               ))}
             </div>
           </ScrollReveal>

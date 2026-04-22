@@ -97,6 +97,13 @@ function App() {
   useEffect(() => {
     localStorage.setItem('portfolio-theme', theme);
     document.documentElement.style.colorScheme = theme;
+
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
     const metaTheme = document.querySelector('meta[name="theme-color"]');
 
     if (metaTheme) {
@@ -168,7 +175,7 @@ function App() {
 
   return (
     <div
-      className={`theme-shell ${theme === 'light' ? 'theme-light' : 'theme-dark'}`}
+      className="theme-shell bg-background min-h-screen text-text-main font-sans transition-colors duration-300"
       onMouseMove={handlePointerMove}
     >
       <a className="skip-link" href="#main-content">

@@ -1,11 +1,65 @@
-import { motion } from 'framer-motion';
+import { animate, motion, useMotionValue, useTransform } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { FaArrowRight, FaEnvelope } from 'react-icons/fa6';
 import ActionButton from '../components/ActionButton.jsx';
 
 const MotionDiv = motion.div;
 const MotionSection = motion.section;
+const MotionStrong = motion.strong;
 
-function HeroSection({ currentRole, heroImage, highlights, profile, socialProof }) {
+function TypingRole({ roles }) {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const displayText = useTransform(rounded, (latest) => roles[roleIndex].slice(0, latest));
+
+  useEffect(() => {
+    let typingControls;
+    let deleteTimeout;
+    let deleteControls;
+
+    const typingAnimation = () => {
+      typingControls = animate(count, roles[roleIndex].length, {
+        type: 'tween',
+        duration: 1.5,
+        ease: 'easeInOut',
+        delay: 0.4,
+        onComplete: () => {
+          deleteTimeout = setTimeout(() => {
+            deleteControls = animate(count, 0, {
+              type: 'tween', duration: 1, ease: 'easeInOut', delay: 1.5,
+              onComplete: () => setRoleIndex((prev) => (prev + 1) % roles.length),
+            });
+          }, 1000);
+        },
+      });
+    };
+
+    typingAnimation();
+
+    return () => {
+      typingControls?.stop();
+      deleteControls?.stop();
+      clearTimeout(deleteTimeout);
+    };
+  }, [roleIndex, roles]);
+
+  return (
+    <MotionStrong className="relative inline-block text-transparent bg-clip-text bg-linear-to-r from-accent via-[#38bdf8] dark:via-[#bae6fd] to-accent bg-size-[200%_auto] animate-shine drop-shadow-[0_0_12px_var(--accent-glow)] font-extrabold pr-1">
+      <motion.span>{displayText}</motion.span>
+      <motion.span
+        className="ml-1 inline-block h-full w-0.5 translate-y-1 bg-current"
+        className="ml-0.5 inline-block h-[0.9em] w-0.75 translate-y-0.5 bg-accent shadow-[0_0_8px_var(--color-accent)] align-baseline"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 0 }}
+        exit={{ opacity: 1 }}
+        transition={{ repeat: Infinity, duration: 0.8, ease: 'easeInOut' }}
+      />
+    </MotionStrong>
+  );
+}
+
+function HeroSection({ roles, heroImage, highlights, profile, socialProof }) {
   return (
     <MotionSection
       className="hero-section"
@@ -33,10 +87,10 @@ function HeroSection({ currentRole, heroImage, highlights, profile, socialProof 
 
           <div className="hero-story-line">
             <span>Currently focused on</span>
-            <strong>{currentRole}</strong>
+            <TypingRole roles={roles} />
           </div>
 
-          <p className="max-w-2xl text-base leading-8 text-[var(--text-muted)] sm:text-lg">
+          <p className="max-w-2xl text-base leading-8 text-(--text-muted) sm:text-lg">
             {profile.summary}
           </p>
 

@@ -17,6 +17,11 @@
   --color-text-soft: var(--text-soft);
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+
+  --animate-shine: shine 3s linear infinite;
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
 }
 
 @layer base {
@@ -102,6 +107,7 @@
 
   p {
     line-height: 1.65;
+    @apply text-justify hyphens-auto;
   }
 
   :focus-visible {
@@ -117,11 +123,11 @@
 
 @layer components {
   .content-panel {
-    @apply bg-surface border border-border rounded-2xl p-6 shadow-[var(--shadow-surface)] transition-all duration-500 relative overflow-hidden;
+    @apply bg-surface border border-border rounded-2xl p-6 shadow-(--shadow-surface) transition-all duration-500 relative overflow-hidden;
   }
 
   .content-panel:hover {
-    @apply -translate-y-1 shadow-[var(--shadow-hover)] border-accent/40;
+    @apply -translate-y-1 shadow-(--shadow-hover) border-accent/40;
   }
 
   .section-eyebrow {
@@ -133,7 +139,7 @@
   }
 
   .hero-title {
-    @apply text-5xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-text-main to-text-muted;
+    @apply text-5xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter mb-6 bg-clip-text text-transparent bg-linear-to-b from-text-main to-text-muted;
   }
 
   .hero-tagline {

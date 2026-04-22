@@ -21,7 +21,13 @@ import {
   FaFire,
   FaServer,
   FaCode,
-  FaGithub
+  FaGithub,
+  FaPalette,
+  FaWandMagicSparkles,
+  FaChessBoard,
+  FaCube,
+  FaLightbulb,
+  FaPlaneUp
 } from 'react-icons/fa6';
 import SectionHeading from '../components/SectionHeading.jsx';
 import ScrollReveal from '../ScrollReveal.jsx';
@@ -53,15 +59,23 @@ const stackCategories = [
     title: 'Deployment',
     skills: ['Vercel', 'Netlify', 'Firebase'],
   },
+  {
+    title: 'Artificial Intelligence',
+    skills: ['Machine Learning', 'Deep Learning', 'Natural Language Processing'],
+  },
+  {
+    title: 'AI Tools',
+    skills: ['ChatGPT-CODEX', 'Google Gemini', 'Claude-Haiku', 'VSCode Copilot', 'GitHub Copilot'],
+  }
 ];
 
 const beyondWorkInterests = [
-  'Painting & Art ( Acrylic, Poster, Sketching )',
-  'Designing & Video Editing ( Canva, Filmora, DaVinci ), Multimedia Operatives.',
-  'Sport - Chess (Rapid/Blitz), Table-Tennis, Volleyball',
-  'Cube Solving : Algorithmic Practice ( 3*3, 4*4 )',
-  'Learning new technologies & exploring creativity.',
-  'Travelling, adventure and wide experiences.',
+  { icon: FaPalette, label: 'Painting & Art', desc: 'Acrylic, Poster, Sketching' },
+  { icon: FaWandMagicSparkles, label: 'Design & Video', desc: 'Canva, Filmora, DaVinci' },
+  { icon: FaChessBoard, label: 'Sports', desc: 'Chess, Table-Tennis, Volleyball' },
+  { icon: FaCube, label: 'Cube Solving', desc: 'Algorithmic Practice (3x3, 4x4)' },
+  { icon: FaLightbulb, label: 'Exploration', desc: 'Learning new tech & creativity' },
+  { icon: FaPlaneUp, label: 'Travelling', desc: 'Adventure & wide experiences' },
 ];
 
 const softSkills = [
@@ -72,6 +86,11 @@ const softSkills = [
   'Project Management',
   'Presentation',
   'Multi-lingual communication - English, Marathi, Hindi',
+  'Adaptability and quick learning',
+  'Empathy and user-centric thinking',
+  'Collaboration and open communication',
+  'Problem-solving mindset',
+  'Time management and reliability',
 ];
 
 const getSkillIcon = (skillName) => {
@@ -167,13 +186,27 @@ function AboutSection({ focusAreas, highlights, interests, profile, skills, stre
             </div>
           </ScrollReveal>
 
-          <ScrollReveal className="grid gap-4 sm:grid-cols-2" delay={0.14}>
-            {highlights.map((item) => (
-              <article className="content-panel compact-panel" key={item.label}>
-                <span className="compact-stat">{item.value}</span>
-                <p className="compact-stat-label">{item.label}</p>
-              </article>
-            ))}
+          <ScrollReveal className="content-panel" delay={0.14}>
+            <p className="section-eyebrow">Beyond work</p>
+            <div className="mt-4 flex flex-col gap-2">
+              {beyondWorkInterests.map((interest) => {
+                const Icon = interest.icon;
+                return (
+                  <motion.div
+                    key={interest.label}
+                    className="flex items-center gap-4 p-2 rounded-xl hover:bg-surface-hover transition-colors group cursor-default"
+                  >
+                    <div className="w-10 h-10 shrink-0 flex items-center justify-center rounded-lg bg-background border border-border text-text-muted group-hover:text-accent group-hover:border-accent/40 transition-all duration-300 shadow-sm">
+                      <Icon className="text-lg group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                    <div className="flex flex-col">
+                      <h4 className="text-sm font-bold text-text-main">{interest.label}</h4>
+                      <p className="text-xs text-text-muted mt-0.5 leading-relaxed">{interest.desc}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </ScrollReveal>
         </div>
 
@@ -204,7 +237,7 @@ function AboutSection({ focusAreas, highlights, interests, profile, skills, stre
             <div className="mt-6 space-y-6">
               {stackCategories.map((category) => (
                 <div key={category.title}>
-                  <h4 className="mb-3 text-sm font-medium text-[var(--text-muted)]">
+                  <h4 className="mb-3 text-sm font-medium text-text-muted">
                     {category.title}
                   </h4>
                   <motion.div 
@@ -229,7 +262,7 @@ function AboutSection({ focusAreas, highlights, interests, profile, skills, stre
                           }}
                           whileHover={{ scale: 1.05, y: -2 }}
                         >
-                          <Icon className="text-[var(--text-muted)]" aria-hidden="true" />
+                          <Icon className="text-text-muted" aria-hidden="true" />
                           {skill}
                         </motion.span>
                       );
@@ -240,15 +273,13 @@ function AboutSection({ focusAreas, highlights, interests, profile, skills, stre
             </div>
           </ScrollReveal>
 
-          <ScrollReveal className="content-panel" delay={0.16}>
-            <p className="section-eyebrow">Beyond work</p>
-            <div className="mt-4 space-y-3">
-              {beyondWorkInterests.map((interest) => (
-                <h4 className="text-sm font-medium text-[var(--text-muted)] leading-relaxed" key={interest}>
-                  {interest}
-                </h4>
-              ))}
-            </div>
+          <ScrollReveal className="grid gap-4 sm:grid-cols-2" delay={0.16}>
+            {highlights.map((item) => (
+              <article className="content-panel compact-panel" key={item.label}>
+                <span className="compact-stat">{item.value}</span>
+                <p className="compact-stat-label">{item.label}</p>
+              </article>
+            ))}
           </ScrollReveal>
         </div>
       </div>

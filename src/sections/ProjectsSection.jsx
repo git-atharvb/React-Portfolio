@@ -40,7 +40,7 @@ function FeaturedProject({ project }) {
         <div className="status-pill">Featured Project</div>
         <p className="section-eyebrow mt-4">Large card showcase</p>
         <h3 className="featured-project-title">{project.title}</h3>
-        <p className="text-base leading-8 text-[var(--text-muted)]">{project.description}</p>
+        <p className="text-base leading-8 text-(--text-muted)">{project.description}</p>
         <div className="tag-list mt-6">
           {project.stack.map((item) => (
             <span className="skill-badge" key={`${project.title}-${item}`}>

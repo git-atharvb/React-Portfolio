@@ -81,9 +81,9 @@ function SocialLinks({ socials }) {
   );
 }
 
-function SidebarCard({ currentRole, heroImage, profile, socials, theme, onToggleTheme, activeSection, navItems, onNavigate, layoutIdPrefix = 'desktop-' }) {
+function SidebarCard({ currentRole, navbarImage, profile, socials, theme, onToggleTheme, activeSection, navItems, onNavigate, layoutIdPrefix = 'desktop-' }) {
   return (
-    <div className="sidebar-card flex flex-col h-full !overflow-hidden !py-4 xl:!py-6">
+    <div className="sidebar-card flex flex-col h-full overflow-hidden! py-4! xl:py-6!">
       {/* Header Area */}
       <div className="shrink-0">
         <div className="flex items-start justify-between gap-4">
@@ -97,7 +97,7 @@ function SidebarCard({ currentRole, heroImage, profile, socials, theme, onToggle
             >
               {profile.brand}
             </motion.a>
-            <p className="mt-1 text-[10px] xl:text-xs uppercase tracking-[0.25em] text-[var(--text-soft)]">
+            <p className="mt-1 text-[10px] xl:text-xs uppercase tracking-[0.25em] text-(--text-soft)">
               Atharv's Portfolio
             </p>
           </div>
@@ -112,31 +112,31 @@ function SidebarCard({ currentRole, heroImage, profile, socials, theme, onToggle
         </div>
 
         <div className="mt-4 xl:mt-6 flex items-center gap-3 xl:gap-4">
-          <div className="sidebar-avatar w-12 h-12 xl:w-16 xl:h-16 shrink-0 overflow-hidden rounded-full border border-[var(--border-color)]">
-            <img alt={`${profile.name} portrait`} className="h-full w-full object-cover" src={heroImage} />
+          <div className="sidebar-avatar w-12 h-12 xl:w-16 xl:h-16 shrink-0 overflow-hidden rounded-full border border-(--border-color)">
+            <img alt={`${profile.name} portrait`} className="h-full w-full object-cover" src={navbarImage} />
           </div>
           <div className="min-w-0 flex-1">
-            <h2 className="text-base xl:text-lg font-bold tracking-tight text-[var(--text-main)] truncate">{profile.name}</h2>
-            <p className="text-xs xl:text-sm text-[var(--text-muted)] truncate">{currentRole}</p>
+            <h2 className="text-base xl:text-lg font-bold tracking-tight text-(--text-main) truncate">{profile.name}</h2>
+            <p className="text-xs xl:text-sm text-(--text-muted) truncate">{currentRole}</p>
           </div>
         </div>
       </div>
 
-      <div className="sidebar-divider shrink-0 !my-3 xl:!my-6" />
+      <div className="sidebar-divider shrink-0 my-3! xl:my-6!" />
 
       {/* Navigation Area */}
       <div className="flex-1 flex flex-col justify-center min-h-0 py-1">
         <NavLinks activeSection={activeSection} navItems={navItems} onNavigate={onNavigate} layoutIdPrefix={layoutIdPrefix} />
       </div>
 
-      <div className="sidebar-divider shrink-0 !my-3 xl:!my-6" />
+      <div className="sidebar-divider shrink-0 my-3! xl:my-6!" />
 
       {/* Footer Area */}
       <div className="sidebar-footer shrink-0 flex flex-col gap-3 xl:gap-4">
         <div className="flex items-center justify-between gap-2">
           <div className="min-w-0">
-            <p className="section-eyebrow !mb-1">Contact</p>
-            <a className="inline-flex items-center gap-2 text-sm text-[var(--text-main)] hover:opacity-80 transition-opacity" href="#contact" onClick={onNavigate}>
+            <p className="section-eyebrow mb-1!">Contact</p>
+            <a className="inline-flex items-center gap-2 text-sm text-(--text-main) hover:opacity-80 transition-opacity" href="#contact" onClick={onNavigate}>
               <FaEnvelope aria-hidden="true" className="shrink-0" />
               <span className="truncate">Let's talk</span>
             </a>
@@ -162,7 +162,7 @@ function SidebarCard({ currentRole, heroImage, profile, socials, theme, onToggle
 function PortfolioSidebar({
   activeSection,
   currentRole,
-  heroImage,
+  navbarImage,
   mobileNavOpen,
   navItems,
   onCloseMobileNav,
@@ -195,12 +195,12 @@ function PortfolioSidebar({
         </div>
       </header>
 
-      <aside className="desktop-sidebar sticky top-0 h-screen !overflow-hidden">
-        <div className="desktop-sidebar-inner h-full !overflow-hidden">
+      <aside className="desktop-sidebar sticky top-0 h-screen overflow-hidden!">
+        <div className="desktop-sidebar-inner h-full overflow-hidden!">
           <SidebarCard
             activeSection={activeSection}
             currentRole={currentRole}
-            heroImage={heroImage}
+            navbarImage={navbarImage}
             navItems={navItems}
             onNavigate={undefined}
             onToggleTheme={onToggleTheme}
@@ -222,7 +222,7 @@ function PortfolioSidebar({
           >
             <MotionAside
               animate={{ x: 0 }}
-              className="mobile-sidebar-sheet right-0 !left-auto !overflow-hidden"
+              className="mobile-sidebar-sheet right-0 left-auto! overflow-hidden!"
               exit={{ x: '100%' }}
               id="mobile-sidebar"
               initial={{ x: '100%' }}
@@ -230,7 +230,7 @@ function PortfolioSidebar({
               <SidebarCard
                 activeSection={activeSection}
                 currentRole={currentRole}
-                heroImage={heroImage}
+                navbarImage={navbarImage}
                 navItems={navItems}
                 onNavigate={onCloseMobileNav}
                 onToggleTheme={onToggleTheme}

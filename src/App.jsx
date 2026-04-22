@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import heroImage from './assets/hero-optimized.jpg';
+import navbarImage from './assets/navbar.jpg';
 import PortfolioSidebar from './components/PortfolioSidebar.jsx';
 import { portfolioContent } from './content/portfolioContent.js';
 import AboutSection from './sections/AboutSection.jsx';
@@ -27,7 +28,8 @@ function App() {
   const smoothPointerY = useSpring(pointerY, { stiffness: 140, damping: 24, mass: 0.35 });
 
   const { seo } = portfolioContent;
-  const currentRole = portfolioContent.profile.roles[0];
+  const { roles } = portfolioContent.profile;
+  const currentRole = roles[0];
   const sectionIds = useMemo(
     () => portfolioContent.navItems.map((item) => item.href.replace('#', '')),
     [],
@@ -201,7 +203,7 @@ function App() {
         <PortfolioSidebar
           activeSection={activeSection}
           currentRole={currentRole}
-          heroImage={heroImage}
+          navbarImage={navbarImage}
           mobileNavOpen={mobileNavOpen}
           navItems={portfolioContent.navItems}
           onCloseMobileNav={closeMobileNav}
@@ -214,7 +216,7 @@ function App() {
 
         <main id="main-content" className="site-main flex-1 min-w-0">
           <HeroSection
-            currentRole={currentRole}
+            roles={roles}
             heroImage={heroImage}
             highlights={portfolioContent.highlights}
             profile={portfolioContent.profile}

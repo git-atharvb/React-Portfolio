@@ -15,7 +15,7 @@ function HeroSection({ currentRole, heroImage, highlights, profile, socialProof 
       viewport={{ once: true, amount: 0.3 }}
       whileInView="visible"
     >
-      <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] xl:gap-12">
+      <div className="hero-layout-grid">
         <MotionDiv
           className="space-y-6"
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -60,17 +60,20 @@ function HeroSection({ currentRole, heroImage, highlights, profile, socialProof 
         </MotionDiv>
 
         <MotionDiv
-          className="relative"
+          className="hero-visual-column"
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
           variants={{
-            hidden: { opacity: 0, scale: 0.94, y: 24 },
+            hidden: { opacity: 0, scale: 0.96, y: 24 },
             visible: { opacity: 1, scale: 1, y: 0 },
           }}
         >
-          <div className="hero-visual-shell">
-            <div className="hero-visual-orbit hero-visual-orbit-top">Scroll storytelling</div>
-            <div className="hero-visual-orbit hero-visual-orbit-bottom">Modern recruiter flow</div>
-            <div className="hero-portrait-panel">
+          <div className="hero-visual-shell tidy-hero-shell">
+            <div className="hero-label-row">
+              <span className="hero-chip">Scroll storytelling</span>
+              <span className="hero-chip">Modern recruiter flow</span>
+            </div>
+
+            <div className="hero-portrait-panel tidy-hero-panel">
               <img
                 alt="Atharv Bowlekar portrait"
                 className="hero-portrait-image"
@@ -79,25 +82,33 @@ function HeroSection({ currentRole, heroImage, highlights, profile, socialProof 
                 src={heroImage}
                 width="810"
               />
-              <div className="hero-portrait-overlay">
+            </div>
+
+            <div className="hero-info-grid">
+              <article className="hero-info-card hero-info-card-wide">
                 <p className="section-eyebrow">Visual anchor</p>
                 <h2>Frontend polish, product clarity, and engineering intent.</h2>
-              </div>
-            </div>
-            <div className="hero-floating-card hero-floating-card-top">
-              <span className="section-eyebrow">Profile</span>
-              <p>Building interfaces that make technical ability immediately legible to recruiters.</p>
-            </div>
-            <div className="hero-floating-card hero-floating-card-bottom">
-              <span className="section-eyebrow">Highlights</span>
-              <div className="grid grid-cols-2 gap-3">
-                {highlights.map((item) => (
-                  <div className="hero-mini-stat" key={item.label}>
-                    <strong>{item.value}</strong>
-                    <span>{item.label}</span>
-                  </div>
-                ))}
-              </div>
+                <p>
+                  A cleaner visual stack that supports the hero instead of competing with it.
+                </p>
+              </article>
+
+              <article className="hero-info-card">
+                <p className="section-eyebrow">Profile</p>
+                <p>Building interfaces that make technical ability immediately legible to recruiters.</p>
+              </article>
+
+              <article className="hero-info-card hero-highlights-card">
+                <p className="section-eyebrow">Highlights</p>
+                <div className="hero-mini-grid">
+                  {highlights.map((item) => (
+                    <div className="hero-mini-stat" key={item.label}>
+                      <strong>{item.value}</strong>
+                      <span>{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </article>
             </div>
           </div>
         </MotionDiv>

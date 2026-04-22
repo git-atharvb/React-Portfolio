@@ -36,6 +36,7 @@ export const portfolioContent = {
     { label: 'About', href: '#about' },
     { label: 'Projects', href: '#projects' },
     { label: 'Journey', href: '#journey' },
+    { label: 'Certifications', href: '#certifications' },
     { label: 'Contact', href: '#contact' },
   ],
   highlights: [
@@ -120,46 +121,55 @@ export const portfolioContent = {
     {
       title: 'DSA Problem Solving for Interviews using Java',
       issuer: 'Scaler',
+      issuerKey: 'scaler',
       link: 'https://drive.google.com/file/d/1S8N73IlglAxgI8mjIloyxgj3lUfpJjyv/view?usp=drive_link',
     },
     {
       title: 'Deep Dive into Deep Learning',
       issuer: 'Scaler',
+      issuerKey: 'scaler',
       link: 'https://drive.google.com/file/d/1Ce7VZZJmOfdbPmRX3x0mUYPnSnAsr9LS/view?usp=drive_link',
     },
     {
       title: 'Foundations of Prompt Engineering',
       issuer: 'Amazon Web Services',
+      issuerKey: 'aws',
       link: 'https://drive.google.com/file/d/12GeroEVRkfxtDvd3vEhaWqLn_mYYwEEW/view?usp=drive_link',
     },
     {
       title: 'GitHub Fundamentals',
       issuer: 'Microsoft Learn',
+      issuerKey: 'microsoft',
       link: 'https://drive.google.com/file/d/1NDHm5tOzJEcE8CJTEe22J8l-eOTjgBum/view?usp=drive_link',
     },
     {
       title: 'ReactJS - Web Development',
       issuer: 'Infosys Springboard',
+      issuerKey: 'infosys',
       link: 'https://drive.google.com/file/d/1oKAUFuMNB9r3BRay43BokxtjtqPftFsi/view?usp=drive_link',
     },
     {
       title: 'Generative AI apps in Azure',
       issuer: 'Microsoft',
+      issuerKey: 'microsoft',
       link: 'https://drive.google.com/file/d/18GmkCzZKCFXdGYRWQafGoranN_nAqCWm/view?usp=drive_link',
     },
     {
       title: 'Data Visualization',
       issuer: 'Tata - Forage',
+      issuerKey: 'tata',
       link: 'https://drive.google.com/file/d/1PSuqH_Aip9lz5BT0VY3Y--KXgu6NcgGc/view?usp=drive_link',
     },
     {
       title: 'Software Engineering Job Simulation',
       issuer: 'JP Morgan Chase & Co.',
+      issuerKey: 'jpmorgan',
       link: 'https://drive.google.com/file/d/1YVgx7JqNj-8WiLAugO4mEhmmijxZUwIS/view?usp=drive_link',
     },
     {
       title: 'Full Stack Java Development',
       issuer: 'Simplilearn',
+      issuerKey: 'simplilearn',
       link: 'https://drive.google.com/file/d/1IphtY07iBF4ocNMVbSctvLqXikgcYa3Z/view?usp=drive_link',
     },
   ],

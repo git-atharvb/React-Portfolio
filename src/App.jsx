@@ -4,6 +4,7 @@ import heroImage from './assets/hero-optimized.jpg';
 import PortfolioSidebar from './components/PortfolioSidebar.jsx';
 import { portfolioContent } from './content/portfolioContent.js';
 import AboutSection from './sections/AboutSection.jsx';
+import CertificationsSection from './sections/CertificationsSection.jsx';
 import ContactSection from './sections/ContactSection.jsx';
 import HeroSection from './sections/HeroSection.jsx';
 import JourneySection from './sections/JourneySection.jsx';
@@ -219,10 +220,10 @@ function App() {
           />
           <ProjectsSection onSpotlight={handleSpotlight} projects={portfolioContent.projects} />
           <JourneySection
-            certifications={portfolioContent.certifications}
             education={portfolioContent.education}
             experience={portfolioContent.experience}
           />
+          <CertificationsSection certifications={portfolioContent.certifications} />
           <ContactSection
             contact={portfolioContent.contact}
             formStatus={formStatus}

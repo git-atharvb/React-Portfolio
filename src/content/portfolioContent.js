@@ -12,10 +12,13 @@ export const portfolioContent = {
     name: 'Atharv Bowlekar',
     brand: '<atharv />',
     location: 'Mumbai, India',
+    tagline: 'Full Stack Developer with a frontend eye, AI curiosity, and security-first thinking.',
     availability: 'Available for internships, freelance work, and collaborative product builds.',
     intro: 'Full Stack Developer building recruiter-ready products with modern frontend craft and a security-first mindset.',
     summary:
       'I design and ship polished web experiences, practical AI experiments, and reliable interfaces that feel intentional, fast, and easy to trust. My current focus is turning technical depth into products that recruiters, mentors, and users can evaluate quickly.',
+    shortBio:
+      'Focused on building interfaces that look refined, communicate clearly, and hold up under real-world product expectations.',
     roles: [
       'Full Stack Developer',
       'AI/ML Enthusiast',
@@ -31,8 +34,8 @@ export const portfolioContent = {
   navItems: [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
-    { label: 'Journey', href: '#journey' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Journey', href: '#journey' },
     { label: 'Contact', href: '#contact' },
   ],
   highlights: [
@@ -45,6 +48,11 @@ export const portfolioContent = {
     'Experience across internships, product prototypes, and academic projects.',
     'Comfortable with React, Python, Firebase, AWS, and secure-by-design thinking.',
     'Strong fit for frontend, full stack, and product engineering internship roles.',
+  ],
+  strengths: [
+    'Responsive frontend systems with polished interaction design',
+    'Secure-by-design product thinking for real-world workflows',
+    'Strong learner energy backed by hands-on internships and projects',
   ],
   focusAreas: [
     {
@@ -160,31 +168,44 @@ export const portfolioContent = {
       title: 'NexaShield',
       summary:
         'Real-time cybersecurity prototype that analyzes logs and flags SQL injection patterns to help teams react earlier.',
+      description:
+        'Designed as a security-oriented product concept that turns raw logs into actionable signals, combining backend analysis with a clearer monitoring experience.',
       stack: ['Python', 'Flask', 'Machine Learning'],
       status: 'Concept + prototype',
       repoUrl: '',
       liveUrl: '',
       highlight: 'Security-focused build',
+      featured: true,
+      metrics: ['Realtime pattern detection', 'ML-assisted analysis', 'Security-first workflow'],
+      theme: 'security',
     },
     {
       title: 'Fitness Tracking App',
       summary:
         'Mobile-first fitness experience for workout logging, goal tracking, and progress visibility backed by realtime data.',
+      description:
+        'Structured around habit building, quick logging, and progress visibility for users who need a clean, motivating interface.',
       stack: ['React Native', 'Firebase', 'Redux'],
       status: 'Case study ready',
       repoUrl: '',
       liveUrl: '',
       highlight: 'Product UX project',
+      metrics: ['Realtime sync', 'Goal tracking', 'Mobile-first flow'],
+      theme: 'wellness',
     },
     {
       title: 'E-Commerce Dashboard',
       summary:
         'Admin dashboard concept for orders, products, and analytics designed around clear decision-making for operators.',
+      description:
+        'Built as a management interface concept that prioritizes quick scanning, structured data hierarchy, and confident operations.',
       stack: ['React', 'Chart.js'],
       status: 'Coming soon',
       repoUrl: '',
       liveUrl: '',
       highlight: 'In active planning',
+      metrics: ['Operator clarity', 'Analytics-first panels', 'Scalable admin UX'],
+      theme: 'commerce',
     },
   ],
   socials: [

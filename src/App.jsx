@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import heroImage from './assets/hero-optimized.jpg';
-import SiteHeader from './components/SiteHeader.jsx';
+import PortfolioSidebar from './components/PortfolioSidebar.jsx';
 import { portfolioContent } from './content/portfolioContent.js';
 import AboutSection from './sections/AboutSection.jsx';
 import ContactSection from './sections/ContactSection.jsx';
@@ -14,10 +14,10 @@ const AuroraBackground = () => <div className="aurora-bg" aria-hidden="true" />;
 const MotionDiv = motion.div;
 
 function App() {
-  const [roleIndex, setRoleIndex] = useState(0);
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
   const [formStatus, setFormStatus] = useState('idle');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const pointerX = useMotionValue(0);
@@ -26,7 +26,11 @@ function App() {
   const smoothPointerY = useSpring(pointerY, { stiffness: 140, damping: 24, mass: 0.35 });
 
   const { seo } = portfolioContent;
-  const currentRole = portfolioContent.profile.roles[roleIndex];
+  const currentRole = portfolioContent.profile.roles[0];
+  const sectionIds = useMemo(
+    () => portfolioContent.navItems.map((item) => item.href.replace('#', '')),
+    [],
+  );
   const themeMeta = useMemo(
     () => ({
       dark: seo.themeColorDark,
@@ -34,18 +38,6 @@ function App() {
     }),
     [seo.themeColorDark, seo.themeColorLight],
   );
-
-  useEffect(() => {
-    if (shouldReduceMotion) {
-      return undefined;
-    }
-
-    const interval = window.setInterval(() => {
-      setRoleIndex((previous) => (previous + 1) % portfolioContent.profile.roles.length);
-    }, 3200);
-
-    return () => window.clearInterval(interval);
-  }, [shouldReduceMotion]);
 
   useEffect(() => {
     document.title = seo.title;
@@ -68,6 +60,35 @@ function App() {
       }
     });
   }, [seo]);
+
+  useEffect(() => {
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (!sections.length) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visibleEntries[0]) {
+          setActiveSection(visibleEntries[0].target.id);
+        }
+      },
+      {
+        rootMargin: '-35% 0px -45% 0px',
+        threshold: [0.2, 0.45, 0.7],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [sectionIds]);
 
   useEffect(() => {
     localStorage.setItem('portfolio-theme', theme);
@@ -165,47 +186,52 @@ function App() {
         style={{ scaleX: scrollYProgress }}
       />
 
-      <SiteHeader
-        mobileNavOpen={mobileNavOpen}
-        navItems={portfolioContent.navItems}
-        onCloseMobileNav={closeMobileNav}
-        onToggleMobileNav={() => setMobileNavOpen((previous) => !previous)}
-        onToggleTheme={toggleTheme}
-        theme={theme}
-      />
-
-      <main id="main-content" className="site-main">
-        <HeroSection
+      <div className="app-shell">
+        <PortfolioSidebar
+          activeSection={activeSection}
           currentRole={currentRole}
           heroImage={heroImage}
-          highlights={portfolioContent.highlights}
+          mobileNavOpen={mobileNavOpen}
+          navItems={portfolioContent.navItems}
+          onCloseMobileNav={closeMobileNav}
+          onToggleMobileNav={() => setMobileNavOpen((previous) => !previous)}
+          onToggleTheme={toggleTheme}
           profile={portfolioContent.profile}
-          socialProof={portfolioContent.socialProof}
-          onSpotlight={handleSpotlight}
+          socials={portfolioContent.socials}
+          theme={theme}
         />
-        <AboutSection
-          focusAreas={portfolioContent.focusAreas}
-          interests={portfolioContent.interests}
-          onSpotlight={handleSpotlight}
-          profile={portfolioContent.profile}
-          skills={portfolioContent.skills}
-        />
-        <JourneySection
-          certifications={portfolioContent.certifications}
-          education={portfolioContent.education}
-          experience={portfolioContent.experience}
-          onSpotlight={handleSpotlight}
-        />
-        <ProjectsSection onSpotlight={handleSpotlight} projects={portfolioContent.projects} />
-      </main>
 
-      <ContactSection
-        contact={portfolioContent.contact}
-        formStatus={formStatus}
-        onFormSubmit={handleFormSubmit}
-        onSpotlight={handleSpotlight}
-        socials={portfolioContent.socials}
-      />
+        <main id="main-content" className="site-main">
+          <HeroSection
+            currentRole={currentRole}
+            heroImage={heroImage}
+            highlights={portfolioContent.highlights}
+            profile={portfolioContent.profile}
+            socialProof={portfolioContent.socialProof}
+          />
+          <AboutSection
+            focusAreas={portfolioContent.focusAreas}
+            highlights={portfolioContent.highlights}
+            interests={portfolioContent.interests}
+            profile={portfolioContent.profile}
+            skills={portfolioContent.skills}
+            strengths={portfolioContent.strengths}
+          />
+          <ProjectsSection onSpotlight={handleSpotlight} projects={portfolioContent.projects} />
+          <JourneySection
+            certifications={portfolioContent.certifications}
+            education={portfolioContent.education}
+            experience={portfolioContent.experience}
+          />
+          <ContactSection
+            contact={portfolioContent.contact}
+            formStatus={formStatus}
+            onFormSubmit={handleFormSubmit}
+            onSpotlight={handleSpotlight}
+            socials={portfolioContent.socials}
+          />
+        </main>
+      </div>
     </div>
   );
 }

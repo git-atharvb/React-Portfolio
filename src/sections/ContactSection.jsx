@@ -18,39 +18,42 @@ function ContactSection({ contact, formStatus, onFormSubmit, onSpotlight, social
   const activeStatus = statusMap[formStatus];
 
   return (
-    <footer className="site-footer" id="contact">
-      <div className="footer-shell">
-        <ScrollReveal className="contact-grid">
-          <section className="panel contact-copy" onPointerMove={onSpotlight}>
-            <p className="section-eyebrow">Contact</p>
-            <h2>{contact.heading}</h2>
-            <p>{contact.body}</p>
-            <a className="contact-email" href={`mailto:${contact.email}`}>
+    <footer className="content-section contact-section" id="contact">
+      <ScrollReveal className="contact-centered-shell" delay={0.06}>
+        <div className="contact-centered-copy">
+          <p className="section-eyebrow">Contact</p>
+          <h2 className="contact-title">{contact.heading}</h2>
+          <p className="mx-auto max-w-2xl text-base leading-8 text-[var(--text-muted)] sm:text-lg">
+            {contact.body}
+          </p>
+
+          <div className="contact-quick-actions">
+            <ActionButton className="button-secondary" href={`mailto:${contact.email}`}>
               <FaEnvelope aria-hidden="true" />
-              {contact.email}
-            </a>
-            <div className="social-row" role="list" aria-label="Social links">
-              {socials.map((social) => {
-                const Icon = iconMap[social.icon];
+              Email Me
+            </ActionButton>
+            {socials.map((social) => {
+              const Icon = iconMap[social.icon];
 
-                return (
-                  <ActionButton
-                    className="social-button"
-                    href={social.href}
-                    key={social.platform}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <Icon aria-hidden="true" />
-                    <span>{social.platform}</span>
-                  </ActionButton>
-                );
-              })}
-            </div>
-          </section>
+              return (
+                <ActionButton
+                  className="button-secondary"
+                  href={social.href}
+                  key={social.platform}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <Icon aria-hidden="true" />
+                  {social.platform}
+                </ActionButton>
+              );
+            })}
+          </div>
+        </div>
 
-          <section className="panel contact-form-panel" onPointerMove={onSpotlight}>
-            <form action={contact.formAction} className="contact-form" method="POST" onSubmit={onFormSubmit}>
+        <div className="contact-form-shell" onPointerMove={onSpotlight}>
+          <form action={contact.formAction} className="contact-form" method="POST" onSubmit={onFormSubmit}>
+            <div className="grid gap-4 md:grid-cols-2">
               <label className="field">
                 <span>Name</span>
                 <input autoComplete="name" name="name" placeholder="Your name" required type="text" />
@@ -59,24 +62,27 @@ function ContactSection({ contact, formStatus, onFormSubmit, onSpotlight, social
                 <span>Email</span>
                 <input autoComplete="email" name="email" placeholder="you@example.com" required type="email" />
               </label>
-              <label className="field">
-                <span>Message</span>
-                <textarea name="message" placeholder="Tell me about the opportunity or idea." required rows="5" />
-              </label>
-              <div aria-live="polite" className={`form-status ${activeStatus.className}`} role="status">
-                {activeStatus.message}
-              </div>
-              <ActionButton
-                className="button-primary submit-button"
-                disabled={formStatus === 'submitting'}
-                type="submit"
-              >
-                {formStatus === 'submitting' ? 'Sending...' : 'Send message'}
-              </ActionButton>
-            </form>
-          </section>
-        </ScrollReveal>
-      </div>
+            </div>
+
+            <label className="field">
+              <span>Message</span>
+              <textarea name="message" placeholder="Tell me about the opportunity or idea." required rows="5" />
+            </label>
+
+            <div aria-live="polite" className={`form-status ${activeStatus.className}`} role="status">
+              {activeStatus.message}
+            </div>
+
+            <ActionButton
+              className="button-primary submit-button"
+              disabled={formStatus === 'submitting'}
+              type="submit"
+            >
+              {formStatus === 'submitting' ? 'Sending...' : 'Send message'}
+            </ActionButton>
+          </form>
+        </div>
+      </ScrollReveal>
     </footer>
   );
 }

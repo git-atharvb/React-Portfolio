@@ -34,7 +34,7 @@ const FloatingParticles = () => {
         <MotionDiv
           key={p.id}
           className="absolute rounded-full bg-accent dark:bg-accent-glow"
-          style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%`, opacity: 0 }}
+          style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%`, opacity: 0, willChange: "transform, opacity" }}
           animate={{
             y: [0, -150],
             x: [0, (Math.random() - 0.5) * 80],
@@ -49,7 +49,7 @@ const FloatingParticles = () => {
 };
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
+  const [theme, setTheme] = useState('dark');
   const [formStatus, setFormStatus] = useState('idle');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -170,8 +170,9 @@ function App() {
       return;
     }
 
-    pointerX.set(event.clientX);
-    pointerY.set(event.clientY);
+    // Offset by 210px (half of the 420px width/height) to center the glow without needing CSS layout translates
+    pointerX.set(event.clientX - 210);
+    pointerY.set(event.clientY - 210);
   };
 
   const handleSpotlight = (event) => {
@@ -222,14 +223,14 @@ function App() {
         <MotionDiv
           aria-hidden="true"
           className="cursor-glow hidden lg:block"
-          style={{ left: smoothPointerX, top: smoothPointerY }}
+          style={{ x: smoothPointerX, y: smoothPointerY, willChange: "transform" }}
         />
       )}
 
       <MotionDiv
         aria-hidden="true"
         className="scroll-progress"
-        style={{ scaleX: scrollYProgress }}
+        style={{ scaleX: scrollYProgress, willChange: "transform" }}
       />
 
       <div className="app-shell flex flex-col lg:flex-row-reverse gap-8 lg:gap-12 !pt-0 !pb-4 md:!pt-2 md:!pb-8">

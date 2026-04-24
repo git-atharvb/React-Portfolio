@@ -141,7 +141,7 @@
 
 @layer components {
   .content-panel {
-    @apply bg-surface border border-border rounded-2xl p-6 shadow-(--shadow-surface) transition-all duration-500 relative overflow-hidden;
+    @apply bg-surface border border-border rounded-2xl p-6 shadow-(--shadow-surface) transition duration-500 relative overflow-hidden;
   }
 
   .content-panel:hover {
@@ -167,14 +167,14 @@
   }
 
   .button-primary {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-text-main text-background font-semibold rounded-xl hover:opacity-100 hover:-translate-y-1.5 active:translate-y-0.5 active:scale-95 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-lg hover:shadow-xl hover:shadow-accent/30 ring-1 ring-text-main/20 dark:ring-white/20;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-text-main text-background font-semibold rounded-xl hover:opacity-100 hover:-translate-y-1.5 active:translate-y-0.5 active:scale-95 transition duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-lg hover:shadow-xl hover:shadow-accent/30 ring-1 ring-text-main/20 dark:ring-white/20;
   }
 
   .button-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-surface border border-border text-text-main font-semibold rounded-xl hover:bg-surface-hover hover:border-accent hover:text-accent hover:-translate-y-1.5 active:translate-y-0.5 active:scale-95 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-sm hover:shadow-accent/20;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-surface border border-border text-text-main font-semibold rounded-xl hover:bg-surface-hover hover:border-accent hover:text-accent hover:-translate-y-1.5 active:translate-y-0.5 active:scale-95 transition duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-sm hover:shadow-accent/20;
   }
 
   .skill-badge {
-    @apply inline-flex items-center px-4 py-2 bg-background border border-border text-text-main text-sm font-mono rounded-xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:border-accent hover:text-accent hover:-translate-y-1.5 hover:shadow-lg hover:shadow-accent/20 cursor-default;
+    @apply inline-flex items-center px-4 py-2 bg-background border border-border text-text-main text-sm font-mono rounded-xl transition duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:border-accent hover:text-accent hover:-translate-y-1.5 hover:shadow-lg hover:shadow-accent/20 cursor-default;
   }
 }

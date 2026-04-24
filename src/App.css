@@ -116,8 +116,8 @@ html {
       radial-gradient(circle at 78% 18%, rgba(244, 63, 94, 0.25), transparent 20%),
       radial-gradient(circle at 55% 88%, rgba(192, 132, 252, 0.25), transparent 28%);
   filter: blur(65px);
-  animation: aurora-float 15s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
   will-change: transform;
+  animation: aurora-float 15s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
 }
 
 @keyframes aurora-float {
@@ -132,13 +132,14 @@ html {
 
 .cursor-glow {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 420px;
   height: 420px;
   z-index: 1;
   pointer-events: none;
   border-radius: 999px;
   background: radial-gradient(circle, var(--accent-glow), transparent 65%);
-  transform: translate(-50%, -50%);
   filter: blur(30px);
 }
 
@@ -428,6 +429,7 @@ html {
   box-shadow: var(--shadow-soft);
   backdrop-filter: blur(12px);
   transition: box-shadow var(--transition-theme), border-color var(--transition-theme), background-color var(--transition-theme), transform var(--transition-theme);
+  will-change: transform, box-shadow;
 }
 
 /* Magnetic Border Glow Effect */

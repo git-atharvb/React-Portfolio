@@ -19,7 +19,7 @@ function ContactSection({ contact, formStatus, onFormSubmit, onSpotlight, social
   const activeStatus = statusMap[formStatus];
 
   return (
-    <footer className="content-section contact-section" id="contact">
+    <footer className="content-section contact-section !pb-0" id="contact">
       <ScrollReveal className="contact-centered-shell" delay={0.06}>
         <div className="contact-centered-copy">
           <p className="section-eyebrow">Contact</p>
@@ -85,7 +85,7 @@ function ContactSection({ contact, formStatus, onFormSubmit, onSpotlight, social
         </div>
       </ScrollReveal>
 
-      <div className="mt-12 flex w-full flex-col items-center justify-center gap-2 border-t border-white/10 pb-8 pt-6">
+      <div className="mt-12 flex w-full flex-col items-center justify-center gap-2 border-t border-white/10 pb-2 pt-6">
         <p className="flex flex-wrap items-center justify-center gap-1.5 text-sm font-medium tracking-wide text-gray-400 transition-colors hover:text-gray-300 md:text-base">
           <span className="text-accent">&copy;</span>
           <span>{portfolioContent.footer.year}</span>

@@ -45,11 +45,10 @@ function TypingRole({ roles }) {
   }, [roleIndex, roles]);
 
   return (
-    <MotionStrong className="relative inline-block text-transparent bg-clip-text bg-linear-to-r from-accent via-[#38bdf8] dark:via-[#bae6fd] to-accent bg-size-[200%_auto] animate-shine drop-shadow-[0_0_12px_var(--accent-glow)] font-extrabold pr-1">
+    <MotionStrong className="relative inline-block text-transparent bg-clip-text bg-linear-to-r from-accent via-secondary to-tertiary bg-size-[200%_auto] animate-shine drop-shadow-[0_0_12px_rgba(139,92,246,0.5)] font-extrabold pr-1">
       <motion.span>{displayText}</motion.span>
       <motion.span
-        className="ml-1 inline-block h-full w-0.5 translate-y-1 bg-current"
-        className="ml-0.5 inline-block h-[0.9em] w-0.75 translate-y-0.5 bg-accent shadow-[0_0_8px_var(--color-accent)] align-baseline"
+        className="ml-0.5 inline-block h-[0.9em] w-1.5 translate-y-0.5 bg-accent shadow-[0_0_8px_theme(colors.accent)] align-baseline"
         initial={{ opacity: 1 }}
         animate={{ opacity: 0 }}
         exit={{ opacity: 1 }}
@@ -62,7 +61,7 @@ function TypingRole({ roles }) {
 function HeroSection({ roles, heroImage, highlights, profile, socialProof }) {
   return (
     <MotionSection
-      className="hero-section !mt-0 !pt-0"
+      className="hero-section !pt-2 md:!pt-8"
       id="home"
       initial="hidden"
       transition={{ staggerChildren: 0.08 }}

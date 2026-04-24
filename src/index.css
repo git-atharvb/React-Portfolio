@@ -153,17 +153,17 @@
   }
 
   .section-subtitle {
-    @apply text-3xl font-extrabold text-text-main mb-4 tracking-tight;
+    @apply font-extrabold text-text-main mb-4 tracking-tight;
   }
 
   .hero-title {
-    @apply text-5xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter mb-6 bg-clip-text text-transparent animate-text-gradient;
+    @apply font-extrabold tracking-tighter mb-6 bg-clip-text text-transparent animate-text-gradient;
     background-image: linear-gradient(to right, var(--text-main), var(--accent), var(--secondary), var(--text-main));
     background-size: 300% auto;
   }
 
   .hero-tagline {
-    @apply text-lg sm:text-xl lg:text-2xl text-text-muted max-w-3xl leading-relaxed font-medium drop-shadow-sm;
+    @apply text-text-muted max-w-3xl leading-relaxed font-medium drop-shadow-sm;
   }
 
   .button-primary {

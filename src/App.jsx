@@ -199,7 +199,7 @@ function App() {
         style={{ scaleX: scrollYProgress }}
       />
 
-      <div className="app-shell flex flex-col lg:flex-row-reverse gap-8 lg:gap-12">
+      <div className="app-shell flex flex-col lg:flex-row-reverse gap-8 lg:gap-12 !py-4 md:!py-8">
         <PortfolioSidebar
           activeSection={activeSection}
           currentRole={currentRole}

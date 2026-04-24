@@ -236,4 +236,8 @@ export const portfolioContent = {
     successMessage: 'Message sent successfully. I will get back to you soon.',
     errorMessage: 'Something went wrong while sending the message. Please try again.',
   },
+  footer: {
+    text: 'Developed & Managed by Atharv Bowlekar',
+    year: '2026',
+  },
 };

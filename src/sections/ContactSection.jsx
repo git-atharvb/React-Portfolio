@@ -1,6 +1,7 @@
 import { FaEnvelope, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa6';
 import ActionButton from '../components/ActionButton.jsx';
 import ScrollReveal from '../ScrollReveal.jsx';
+import { portfolioContent } from '../content/portfolioContent.js';
 
 const iconMap = {
   linkedin: FaLinkedin,
@@ -83,6 +84,17 @@ function ContactSection({ contact, formStatus, onFormSubmit, onSpotlight, social
           </form>
         </div>
       </ScrollReveal>
+
+      <div className="mt-12 flex w-full flex-col items-center justify-center gap-2 border-t border-white/10 pb-8 pt-6">
+        <p className="flex flex-wrap items-center justify-center gap-1.5 text-sm font-medium tracking-wide text-gray-400 transition-colors hover:text-gray-300 md:text-base">
+          <span className="text-accent">&copy;</span>
+          <span>{portfolioContent.footer.year}</span>
+          <span className="hidden text-gray-600 md:inline">|</span>
+          <span>{portfolioContent.footer.text}</span>
+          <span className="align-super text-xs text-gray-500">&reg;</span>
+        </p>
+        <p className="text-xs text-gray-600">All rights reserved.</p>
+      </div>
     </footer>
   );
 }

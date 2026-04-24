@@ -62,7 +62,7 @@ function TypingRole({ roles }) {
 function HeroSection({ roles, heroImage, highlights, profile, socialProof }) {
   return (
     <MotionSection
-      className="hero-section"
+      className="hero-section !pt-2 md:!pt-8"
       id="home"
       initial="hidden"
       transition={{ staggerChildren: 0.08 }}

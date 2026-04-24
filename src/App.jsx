@@ -15,6 +15,39 @@ import './App.css';
 const AuroraBackground = () => <div className="aurora-bg" aria-hidden="true" />;
 const MotionDiv = motion.div;
 
+const FloatingParticles = () => {
+  // Generate 30 random particles with varying sizes, positions, and durations
+  const particles = useMemo(() =>
+    Array.from({ length: 30 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 6 + 2,
+      duration: Math.random() * 15 + 10,
+      delay: Math.random() * -20, // Negative delay so they start already in motion
+    })),
+  []);
+
+  return (
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden [mask-image:linear-gradient(to_bottom,white_40%,transparent_100%)]">
+      {particles.map((p) => (
+        <MotionDiv
+          key={p.id}
+          className="absolute rounded-full bg-accent dark:bg-accent-glow"
+          style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%`, opacity: 0 }}
+          animate={{
+            y: [0, -150],
+            x: [0, (Math.random() - 0.5) * 80],
+            opacity: [0, 0.6, 0],
+            scale: [0.5, 1.5, 0.5],
+          }}
+          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "linear" }}
+        />
+      ))}
+    </div>
+  );
+};
+
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
   const [formStatus, setFormStatus] = useState('idle');
@@ -215,13 +248,16 @@ function App() {
         />
 
         <main id="main-content" className="site-main flex-1 min-w-0">
-          <HeroSection
-            roles={roles}
-            heroImage={heroImage}
-            highlights={portfolioContent.highlights}
-            profile={portfolioContent.profile}
-            socialProof={portfolioContent.socialProof}
-          />
+          <div className="relative">
+            <FloatingParticles />
+            <HeroSection
+              roles={roles}
+              heroImage={heroImage}
+              highlights={portfolioContent.highlights}
+              profile={portfolioContent.profile}
+              socialProof={portfolioContent.socialProof}
+            />
+          </div>
           <AboutSection
             focusAreas={portfolioContent.focusAreas}
             highlights={portfolioContent.highlights}

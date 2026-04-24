@@ -1,6 +1,6 @@
 :root {
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
   --radius-xl: 32px;
   --radius-lg: 24px;
   --radius-md: 18px;
@@ -8,38 +8,38 @@
   --transition-theme: 500ms var(--ease-smooth);
 
   /* Pearl Light Mode (Default) */
-  --bg-sidebar: rgba(252, 252, 252, 0.85);
+  --bg-sidebar: rgba(250, 250, 250, 0.85);
   --bg-panel: rgba(255, 255, 255, 0.7);
   --bg-panel-strong: rgba(255, 255, 255, 0.95);
-  --border-soft: rgba(15, 23, 42, 0.08);
-  --border-strong: rgba(15, 23, 42, 0.15);
-  --text-muted: #475569;
-  --text-soft: #94a3b8;
-  --accent-soft: rgba(37, 99, 235, 0.08);
-  --accent-glow: rgba(37, 99, 235, 0.2);
-  --secondary: #0ea5e9;
+  --border-soft: rgba(9, 9, 11, 0.08);
+  --border-strong: rgba(9, 9, 11, 0.15);
+  --text-muted: #52525b;
+  --text-soft: #a1a1aa;
+  --accent-soft: rgba(79, 70, 229, 0.08);
+  --accent-glow: rgba(79, 70, 229, 0.25);
+  --secondary: #f43f5e; /* Vibrant Rose / Coral */
 
   /* Layered Volumetric Shadows (Light) */
-  --shadow-soft: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 0 3px rgba(15, 23, 42, 0.02);
-  --shadow-elevated: 0 12px 32px -4px rgba(15, 23, 42, 0.1), 0 0 8px rgba(15, 23, 42, 0.04);
+  --shadow-soft: 0 4px 24px -2px rgba(79, 70, 229, 0.06), 0 0 4px rgba(79, 70, 229, 0.03);
+  --shadow-elevated: 0 16px 40px -4px rgba(79, 70, 229, 0.12), 0 0 10px rgba(79, 70, 229, 0.05);
 }
 
 /* OLED Dark Mode */
 .dark {
-  --bg-sidebar: rgba(2, 6, 23, 0.85);
-  --bg-panel: rgba(15, 23, 42, 0.5);
-  --bg-panel-strong: rgba(15, 23, 42, 0.85);
-  --border-soft: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --text-muted: #94a3b8;
-  --text-soft: #64748b;
-  --accent-soft: rgba(56, 189, 248, 0.1);
-  --accent-glow: rgba(56, 189, 248, 0.25);
-  --secondary: #2dd4bf;
+  --bg-sidebar: rgba(0, 0, 0, 0.85);
+  --bg-panel: rgba(9, 9, 11, 0.6);
+  --bg-panel-strong: rgba(24, 24, 27, 0.85);
+  --border-soft: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --text-muted: #a1a1aa;
+  --text-soft: #71717a;
+  --accent-soft: rgba(34, 211, 238, 0.12);
+  --accent-glow: rgba(34, 211, 238, 0.35);
+  --secondary: #c084fc; /* Neon Purple */
 
   /* Layered Volumetric Shadows (Dark) */
-  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 3px rgba(255, 255, 255, 0.03);
-  --shadow-elevated: 0 12px 32px -4px rgba(0, 0, 0, 0.7), 0 0 8px rgba(255, 255, 255, 0.05);
+  --shadow-soft: 0 8px 32px -4px rgba(34, 211, 238, 0.08), 0 0 4px rgba(34, 211, 238, 0.04);
+  --shadow-elevated: 0 16px 48px -4px rgba(34, 211, 238, 0.15), 0 0 12px rgba(34, 211, 238, 0.08);
 }
 
 .theme-shell {
@@ -78,20 +78,21 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 18% 18%, rgba(74, 182, 255, 0.18), transparent 20%),
-    radial-gradient(circle at 78% 18%, rgba(97, 223, 187, 0.14), transparent 16%),
-    radial-gradient(circle at 55% 88%, rgba(12, 125, 255, 0.11), transparent 24%);
+      radial-gradient(circle at 18% 18%, var(--accent-glow), transparent 24%),
+      radial-gradient(circle at 78% 18%, rgba(244, 63, 94, 0.15), transparent 20%),
+      radial-gradient(circle at 55% 88%, rgba(192, 132, 252, 0.15), transparent 28%);
   filter: blur(58px);
-  animation: aurora-float 16s ease-in-out infinite alternate;
+    animation: aurora-float 20s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    will-change: transform;
 }
 
 @keyframes aurora-float {
   from {
-    transform: scale(1) translate3d(0, 0, 0);
+    transform: scale(1) translate3d(0, 0, 0) rotate(0deg);
   }
 
   to {
-    transform: scale(1.05) translate3d(2%, -2%, 0);
+    transform: scale(1.1) translate3d(3%, -3%, 0) rotate(2deg);
   }
 }
 
@@ -169,12 +170,13 @@
   border: 1px solid var(--border-soft);
   background: var(--accent-soft);
   color: var(--text-main);
-  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.4s var(--ease-out), border-color 0.4s var(--ease-out), background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
 
 .theme-toggle:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.05);
   border-color: var(--border-strong);
+  box-shadow: 0 4px 12px var(--accent-soft);
 }
 
 .sidebar-card {
@@ -267,13 +269,15 @@
   border: 1px solid var(--border-soft);
   color: var(--text-main);
   background: transparent;
-  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.4s var(--ease-out), border-color 0.4s var(--ease-out), background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), color 0.4s var(--ease-out);
 }
 
 .sidebar-social-link:hover {
-  transform: translateY(-2px);
-  border-color: var(--border-strong);
-  background: var(--accent-soft);
+  transform: translateY(-3px) scale(1.08);
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg-main);
+  box-shadow: 0 6px 16px var(--accent-glow);
 }
 
 .mobile-sidebar-backdrop {
@@ -395,7 +399,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--accent-soft), transparent 60%);
+  background: radial-gradient(circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--accent-glow), transparent 60%);
   opacity: 0;
   transition: opacity var(--transition-theme);
   pointer-events: none;
@@ -826,12 +830,13 @@
   gap: 1.25rem;
   padding: 1.35rem;
   border-radius: var(--radius-lg);
-  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: box-shadow 0.5s var(--ease-out), border-color 0.5s var(--ease-out), transform 0.5s var(--ease-out);
 }
 
 .bento-project-card:hover {
-  border-color: var(--border-strong);
+  border-color: var(--accent);
   box-shadow: var(--shadow-elevated);
+  transform: translateY(-4px);
 }
 
 .bento-project-visual {

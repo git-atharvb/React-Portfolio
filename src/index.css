@@ -26,37 +26,37 @@
 
 @layer base {
   :root {
-    /* Crisp, modern light mode (Vercel/Linear style) */
-    --bg-main: #f8fafc;
+    /* Vibrant, modern light mode */
+    --bg-main: #fafafa;
     --bg-surface: #ffffff;
-    --bg-surface-hover: #f1f5f9;
-    --color-primary: #0f172a;
-    --color-secondary: #334155;
-    --color-accent: #2563eb;
-    --color-accent-hover: #1d4ed8;
-    --border-color: #e2e8f0;
-    --text-main: #0f172a;
-    --text-muted: #475569;
-    --text-soft: #94a3b8;
-    --shadow-surface: 0 10px 40px -10px rgba(15, 23, 42, 0.08);
-    --shadow-hover: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
+    --bg-surface-hover: #f4f4f5;
+    --color-primary: #09090b;
+    --color-secondary: #3f3f46;
+    --color-accent: #4f46e5; /* Electric Indigo */
+    --color-accent-hover: #4338ca;
+    --border-color: #e4e4e7;
+    --text-main: #18181b;
+    --text-muted: #52525b;
+    --text-soft: #a1a1aa;
+    --shadow-surface: 0 10px 40px -10px rgba(79, 70, 229, 0.08);
+    --shadow-hover: 0 20px 40px -10px rgba(79, 70, 229, 0.15);
   }
 
   .dark {
-    /* Deep, rich dark mode (Supabase/Raycast style) */
-    --bg-main: #020617;
-    --bg-surface: #0f172a;
-    --bg-surface-hover: #1e293b;
-    --color-primary: #f7fafc;
-    --color-secondary: #cbd5e1;
-    --color-accent: #38bdf8;
-    --color-accent-hover: #7dd3fc;
-    --border-color: rgba(255, 255, 255, 0.08);
-    --text-main: #f7fafc;
-    --text-muted: #94a3b8;
-    --text-soft: #64748b;
-    --shadow-surface: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-    --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+    /* True OLED dark mode with neon accents */
+    --bg-main: #000000;
+    --bg-surface: #09090b;
+    --bg-surface-hover: #18181b;
+    --color-primary: #fafafa;
+    --color-secondary: #a1a1aa;
+    --color-accent: #22d3ee; /* Neon Cyan */
+    --color-accent-hover: #06b6d4;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-main: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --text-soft: #71717a;
+    --shadow-surface: 0 10px 40px -10px rgba(34, 211, 238, 0.05);
+    --shadow-hover: 0 20px 40px -10px rgba(34, 211, 238, 0.15);
   }
 
   html {
@@ -123,11 +123,11 @@
 
 @layer components {
   .content-panel {
-    @apply bg-surface border border-border rounded-2xl p-6 shadow-(--shadow-surface) transition-all duration-500 relative overflow-hidden;
+    @apply bg-surface border border-border rounded-2xl p-6 shadow-(--shadow-surface) transition-all duration-500 ease-out relative overflow-hidden;
   }
 
   .content-panel:hover {
-    @apply -translate-y-1 shadow-(--shadow-hover) border-accent/40;
+    @apply -translate-y-1.5 shadow-(--shadow-hover) border-accent/50;
   }
 
   .section-eyebrow {
@@ -147,14 +147,14 @@
   }
 
   .button-primary {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-text-main text-background font-semibold rounded-xl hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 shadow-lg hover:shadow-xl ring-1 ring-text-main/20 dark:ring-white/20;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-text-main text-background font-semibold rounded-xl hover:opacity-100 hover:-translate-y-1 active:translate-y-0.5 active:scale-95 transition-all duration-500 ease-out shadow-lg hover:shadow-xl ring-1 ring-text-main/20 dark:ring-white/20;
   }
 
   .button-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-surface border border-border text-text-main font-semibold rounded-xl hover:bg-surface-hover hover:border-accent hover:text-accent hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 shadow-sm hover:shadow-md;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-surface border border-border text-text-main font-semibold rounded-xl hover:bg-surface-hover hover:border-accent hover:text-accent hover:-translate-y-1 active:translate-y-0.5 active:scale-95 transition-all duration-500 ease-out shadow-sm hover:shadow-md;
   }
 
   .skill-badge {
-    @apply inline-flex items-center px-4 py-2 bg-background border border-border text-text-main text-sm font-mono rounded-xl transition-all duration-300 hover:border-accent hover:text-accent hover:-translate-y-0.5 dark:hover:shadow-[0_0_15px_rgba(56,189,248,0.15)] cursor-default;
+    @apply inline-flex items-center px-4 py-2 bg-background border border-border text-text-main text-sm font-mono rounded-xl transition-all duration-500 ease-out hover:border-accent hover:text-accent hover:-translate-y-1 hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(34,211,238,0.25)] cursor-default;
   }
 }
